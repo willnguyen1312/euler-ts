@@ -13,14 +13,12 @@
     "npm": ">=5"
   },
   "scripts": {
-    "test": "cross-env CI=1 react-scripts-ts test",
-    "test:watch": "react-scripts-ts test",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "test:ci": "cross-env CI=1 react-scripts-ts test",
+    "test": "react-scripts-ts test",
+    "lint": "tslint ./src/**/*.ts"
   },
   "dependencies": {},
-  "peerDependencies": {
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@svgr/rollup": "^4.1.0",
     "@types/jest": "^24.0.9",
@@ -28,6 +26,7 @@
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
+    "prettier": "^1.16.4",
     "react-scripts-ts": "^3.1.0",
     "rollup": "^1.4.1",
     "rollup-plugin-babel": "^4.3.2",
@@ -37,9 +36,21 @@
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-typescript2": "^0.19.3",
     "rollup-plugin-url": "^2.2.0",
+    "ts-lint": "^4.5.1",
     "typescript": "^3.3.3333"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test && yarn lint && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
 }

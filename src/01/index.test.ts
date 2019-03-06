@@ -1,7 +1,7 @@
-import HI from '.'
+import HI from ".";
 
-describe('ExampleComponent', () => {
-  it('is truthy', () => {
-    expect(HI).toBe(3)
-  })
-})
+describe("ExampleComponent", () => {
+  it("is truthy", () => {
+    expect(HI).toBe(3);
+  });
+});
